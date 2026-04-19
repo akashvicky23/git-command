@@ -1,0 +1,477 @@
+# Git Repository Creation and Core Commands Workflow
+
+## Create a New Local Repository
+
+```bash
+git init
+```
+
+Initialize Git in the current folder.
+
+Example:
+
+```bash
+mkdir my-project
+cd my-project
+git init
+```
+
+---
+
+## Clone an Existing Repository
+
+```bash
+git clone <repository-url>
+```
+
+Example:
+
+```bash
+git clone https://github.com/username/project.git
+```
+
+---
+
+# Configure Git
+
+Set username:
+
+```bash
+git config --global user.name "Your Name"
+```
+
+Set email:
+
+```bash
+git config --global user.email "your@email.com"
+```
+
+View configuration:
+
+```bash
+git config --list
+```
+
+Local configuration:
+
+```bash
+git config user.name "Project Name"
+```
+
+---
+
+# Full Repository Creation Flow
+
+```bash
+mkdir my-project
+cd my-project
+git init
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+```
+
+Create files:
+
+```bash
+echo "# My Project" > README.md
+```
+
+Check status:
+
+```bash
+git status
+```
+
+Add files:
+
+```bash
+git add .
+```
+
+Commit:
+
+```bash
+git commit -m "Initial commit"
+```
+
+Create repository in GitHub, then connect:
+
+```bash
+git remote add origin https://github.com/username/my-project.git
+```
+
+Push:
+
+```bash
+git branch -M main
+git push -u origin main
+```
+
+---
+
+# Important Git Commands
+
+## Status
+
+```bash
+git status
+```
+
+Shows modified, staged, and untracked files.
+
+---
+
+## Add Files
+
+Single file:
+
+```bash
+git add filename
+```
+
+All files:
+
+```bash
+git add .
+```
+
+---
+
+## Commit Changes
+
+```bash
+git commit -m "Your message"
+```
+
+---
+
+## Branches
+
+View branches:
+
+```bash
+git branch
+```
+
+View all branches:
+
+```bash
+git branch -a
+```
+
+Create branch:
+
+```bash
+git branch feature-login
+```
+
+Create and switch:
+
+```bash
+git checkout -b feature-login
+```
+
+Or:
+
+```bash
+git switch -c feature-login
+```
+
+Switch branch:
+
+```bash
+git checkout main
+```
+
+Or:
+
+```bash
+git switch main
+```
+
+---
+
+## Merge Branch
+
+```bash
+git checkout main
+git merge feature-login
+```
+
+---
+
+## Rebase
+
+```bash
+git checkout feature-login
+git rebase main
+```
+
+---
+
+## Pull and Push
+
+Download and merge:
+
+```bash
+git pull origin main
+```
+
+Push:
+
+```bash
+git push origin main
+```
+
+Only download:
+
+```bash
+git fetch
+```
+
+---
+
+## Remote Repository
+
+View remotes:
+
+```bash
+git remote -v
+```
+
+Add remote:
+
+```bash
+git remote add origin <repository-url>
+```
+
+---
+
+## Log and Difference
+
+Commit history:
+
+```bash
+git log
+```
+
+One-line log:
+
+```bash
+git log --oneline --graph --all
+```
+
+See changes:
+
+```bash
+git diff
+```
+
+---
+
+## Tags
+
+Create lightweight tag:
+
+```bash
+git tag v1.0
+```
+
+Annotated tag:
+
+```bash
+git tag -a v1.0 -m "Version 1.0"
+```
+
+Push tags:
+
+```bash
+git push origin v1.0
+git push origin --tags
+```
+
+---
+
+## Stash
+
+Save changes temporarily:
+
+```bash
+git stash
+```
+
+Restore and remove:
+
+```bash
+git stash pop
+```
+
+Restore only:
+
+```bash
+git stash apply
+```
+
+---
+
+## Reset
+
+Unstage file:
+
+```bash
+git reset filename
+```
+
+Keep changes, remove commit:
+
+```bash
+git reset --soft HEAD~1
+```
+
+Delete commit and changes:
+
+```bash
+git reset --hard HEAD~1
+```
+
+---
+
+## Revert Commit
+
+```bash
+git revert <commit-id>
+```
+
+Creates a new commit that undoes the selected commit.
+
+---
+
+## Cherry-pick
+
+```bash
+git cherry-pick <commit-id>
+```
+
+Copy one commit into current branch.
+
+---
+
+## Show Commit Details
+
+```bash
+git show <commit-id>
+```
+
+---
+
+## Blame
+
+```bash
+git blame filename
+```
+
+Shows who changed each line.
+
+---
+
+## Clean Untracked Files
+
+Preview:
+
+```bash
+git clean -n
+```
+
+Delete:
+
+```bash
+git clean -f
+```
+
+---
+
+## Remove File
+
+```bash
+git rm filename
+```
+
+---
+
+## Rename File
+
+```bash
+git mv oldname newname
+```
+
+---
+
+## Archive Repository
+
+```bash
+git archive --format=zip --output=project.zip main
+```
+
+---
+
+# Best Practical Workflow
+
+```bash
+git clone <repo>
+cd <repo>
+git switch -c feature-name
+# modify files
+git status
+git add .
+git commit -m "Added feature"
+git pull origin main
+git rebase main
+git push origin feature-name
+```
+
+Then create a pull request in GitHub.
+
+# Single Command Explanation
+
+| Command                          | Purpose                                                     |
+| -------------------------------- | ----------------------------------------------------------- |
+| `git init`                       | Creates a new Git repository in the current folder.         |
+| `git clone <url>`                | Downloads an existing repository from a remote server.      |
+| `git config`                     | Sets Git configuration for the current repository.          |
+| `git config --global`            | Sets Git configuration for all repositories on your system. |
+| `git status`                     | Shows changed, staged, and untracked files.                 |
+| `git add <file>`                 | Adds a specific file to staging.                            |
+| `git add .`                      | Adds all changed files to staging.                          |
+| `git commit`                     | Saves staged changes as a commit.                           |
+| `git commit -m "message"`        | Creates a commit with a message directly.                   |
+| `git branch`                     | Lists local branches.                                       |
+| `git branch -a`                  | Lists local and remote branches.                            |
+| `git checkout <branch>`          | Switches to another branch.                                 |
+| `git checkout -b <branch>`       | Creates a new branch and switches to it.                    |
+| `git switch <branch>`            | Switches to another branch. Newer version of checkout.      |
+| `git merge <branch>`             | Combines another branch into the current branch.            |
+| `git rebase <branch>`            | Moves current branch commits on top of another branch.      |
+| `git pull`                       | Downloads and merges latest changes from remote.            |
+| `git push`                       | Uploads local commits to remote repository.                 |
+| `git fetch`                      | Downloads latest remote changes without merging.            |
+| `git remote`                     | Shows remote repository names.                              |
+| `git remote -v`                  | Shows remote names with URLs.                               |
+| `git remote add origin <url>`    | Connects local repository to a remote repository.           |
+| `git log`                        | Shows commit history.                                       |
+| `git diff`                       | Shows changes between files or commits.                     |
+| `git tag <name>`                 | Creates a lightweight tag.                                  |
+| `git tag -a <name> -m "message"` | Creates an annotated tag.                                   |
+| `git stash`                      | Temporarily saves uncommitted changes.                      |
+| `git stash pop`                  | Restores stashed changes and removes them from stash.       |
+| `git stash apply`                | Restores stashed changes but keeps them in stash.           |
+| `git reset`                      | Removes files from staging area.                            |
+| `git reset --soft HEAD~1`        | Removes last commit but keeps changes staged.               |
+| `git reset --hard HEAD~1`        | Removes last commit and deletes changes completely.         |
+| `git revert <commit>`            | Creates a new commit that reverses another commit.          |
+| `git cherry-pick <commit>`       | Copies a specific commit into current branch.               |
+| `git show <commit>`              | Displays details of a commit.                               |
+| `git blame <file>`               | Shows who changed each line in a file.                      |
+| `git clean -f`                   | Deletes untracked files.                                    |
+| `git rm <file>`                  | Removes a file from Git and filesystem.                     |
+| `git mv <old> <new>`             | Renames or moves a file.                                    |
+| `git archive`                    | Creates a zip or tar file from repository contents.         |
